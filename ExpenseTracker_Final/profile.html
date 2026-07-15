@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile | ExpenseTracker</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/forms.css">
+<style>
+.profile-card { max-width: 480px; margin: 0 auto; text-align: center; }
+.profile-avatar {
+    width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--dark-blue));
+    color: #fff; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 700;
+    margin: 0 auto 16px; overflow: hidden;
+}
+.profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.profile-detail-row { display: flex; justify-content: space-between; padding: 12px 4px; border-bottom: 1px solid var(--border); font-size: 14px; text-align: left; }
+.profile-detail-row .label { color: var(--text-muted); font-weight: 600; }
+.profile-detail-row .value { color: var(--text); }
+</style>
+</head>
+<body>
+
+<div id="navbar-placeholder"></div>
+
+<main class="page-container">
+    <h1 class="page-title">My Profile</h1>
+    <p class="page-subtitle">Your account details.</p>
+
+    <div class="form-card profile-card">
+        <div class="profile-avatar" id="profileAvatar">?</div>
+        <h2 id="profileUsername" style="color:var(--dark-blue);margin-bottom:4px;">-</h2>
+        <p style="color:var(--text-muted);font-size:13px;margin-bottom:22px;">Member since <span id="profileDateJoined">-</span></p>
+
+        <div class="profile-detail-row"><span class="label">User ID</span><span class="value" id="profileId">-</span></div>
+        <div class="profile-detail-row"><span class="label">Username</span><span class="value" id="profileUsernameDetail">-</span></div>
+        <div class="profile-detail-row"><span class="label">Email</span><span class="value" id="profileEmail">-</span></div>
+        <div class="profile-detail-row"><span class="label">Total Expenses Logged</span><span class="value" id="profileExpenseCount">0</span></div>
+
+        <form id="profileImageForm" class="mt-24" novalidate>
+            <div class="form-group full-width">
+                <label for="profileImageInput">Profile Image URL (optional)</label>
+                <input type="text" id="profileImageInput" placeholder="https://example.com/avatar.jpg">
+                <div class="hint">Paste a link to an image to use as your avatar.</div>
+            </div>
+            <div class="form-actions" style="justify-content:center;">
+                <button type="submit" class="btn btn-primary">Save Avatar</button>
+                <button type="button" class="btn btn-danger" id="profileLogoutBtn">Logout</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<div id="footer-placeholder"></div>
+
+<script src="js/storage.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/common.js"></script>
+<script>
+    function renderProfile() {
+        const user = getCurrentUser();
+        if (!user) return;
+
+        const expenses = getExpenses(user.username);
+
+        document.getElementById('profileUsername').textContent = user.username;
+        document.getElementById('profileUsernameDetail').textContent = user.username;
+        document.getElementById('profileEmail').textContent = user.email;
+        document.getElementById('profileId').textContent = '#' + user.id;
+        document.getElementById('profileExpenseCount').textContent = expenses.length;
+
+        const joined = new Date(user.dateJoined);
+        document.getElementById('profileDateJoined').textContent = isNaN(joined.getTime())
+            ? '-' : joined.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+
+        const avatar = document.getElementById('profileAvatar');
+        if (user.profileImage) {
+            avatar.innerHTML = `<img src="${escapeHtml(user.profileImage)}" alt="Profile image">`;
+        } else {
+            avatar.textContent = user.username.charAt(0).toUpperCase();
+        }
+
+        document.getElementById('profileImageInput').value = user.profileImage || '';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        requireAuth();
+        initLayout('profile.html');
+        renderProfile();
+
+        document.getElementById('profileImageForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const url = document.getElementById('profileImageInput').value.trim();
+            const users = getUsers();
+            const user = getCurrentUser();
+            const index = users.findIndex(u => u.id === user.id);
+            if (index !== -1) {
+                users[index].profileImage = url;
+                saveUsers(users);
+                showToast('Profile updated.', 'success');
+                renderProfile();
+            }
+        });
+
+        document.getElementById('profileLogoutBtn').addEventListener('click', () => {
+            showConfirmModal('Are you sure you want to logout?', () => logoutUser());
+        });
+    });
+</script>
+</body>
+</html>

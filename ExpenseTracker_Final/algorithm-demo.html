@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Algorithm Demo | ExpenseTracker</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/forms.css">
+<style>
+.algo-block { background:#fff; border-radius:var(--radius); box-shadow:var(--shadow); padding:24px 26px; margin-bottom:22px; border-left:5px solid var(--primary); }
+.algo-block h3 { color:var(--dark-blue); font-size:18px; margin-bottom:8px; }
+.algo-block h4 { color:var(--primary); font-size:13px; text-transform:uppercase; margin-top:12px; margin-bottom:4px; }
+.algo-block pre { background:#0F172A; color:#E2E8F0; padding:14px 16px; border-radius:8px; font-size:12.5px; overflow-x:auto; margin:6px 0; }
+.complexity-pill { display:inline-block; background:#EFF4FF; color:var(--primary); padding:4px 12px; border-radius:20px; font-size:12.5px; font-weight:600; margin-right:8px; }
+</style>
+</head>
+<body>
+
+<div id="navbar-placeholder"></div>
+
+<main class="page-container">
+    <h1 class="page-title">Algorithm Demonstration</h1>
+    <p class="page-subtitle">Explanations, pseudocode and complexity for every algorithm in this project &mdash; plus a live, interactive demo below.</p>
+
+    <div class="algo-block">
+        <h3>Linear Search</h3>
+        <p>Scans every element sequentially until a match is found.</p>
+        <h4>Pseudocode</h4>
+        <pre>for i = 0 to n-1:
+    if arr[i] == target: return i
+return -1</pre>
+        <span class="complexity-pill">Time: O(n)</span><span class="complexity-pill">Space: O(1)</span>
+        <h4>Advantages</h4><p>Simple; works on unsorted data.</p>
+        <h4>Disadvantages</h4><p>Slow on large datasets.</p>
+    </div>
+
+    <div class="algo-block">
+        <h3>Binary Search</h3>
+        <p>Repeatedly halves a sorted array's search interval.</p>
+        <h4>Pseudocode</h4>
+        <pre>low=0, high=n-1
+while low &lt;= high:
+    mid = (low+high)/2
+    if arr[mid]==target: return mid
+    elif arr[mid]&lt;target: low=mid+1
+    else: high=mid-1
+return -1</pre>
+        <span class="complexity-pill">Time: O(log n)</span><span class="complexity-pill">Space: O(1)</span>
+        <h4>Advantages</h4><p>Very fast on large sorted datasets.</p>
+        <h4>Disadvantages</h4><p>Requires sorted data first.</p>
+    </div>
+
+    <div class="algo-block">
+        <h3>Bubble Sort</h3>
+        <h4>Pseudocode</h4>
+        <pre>for i = 0 to n-2:
+    for j = 0 to n-i-2:
+        if arr[j] &gt; arr[j+1]: swap(arr[j], arr[j+1])</pre>
+        <span class="complexity-pill">Time: O(n&sup2;)</span><span class="complexity-pill">Space: O(1)</span>
+        <h4>Advantages</h4><p>Easiest to understand.</p>
+        <h4>Disadvantages</h4><p>Very slow on large data.</p>
+    </div>
+
+    <div class="algo-block">
+        <h3>Selection Sort</h3>
+        <h4>Pseudocode</h4>
+        <pre>for i = 0 to n-2:
+    minIdx = i
+    for j = i+1 to n-1:
+        if arr[j] &lt; arr[minIdx]: minIdx = j
+    swap(arr[i], arr[minIdx])</pre>
+        <span class="complexity-pill">Time: O(n&sup2;)</span><span class="complexity-pill">Space: O(1)</span>
+        <h4>Advantages</h4><p>Fewer swaps than Bubble Sort.</p>
+        <h4>Disadvantages</h4><p>Still O(n&sup2;) in all cases.</p>
+    </div>
+
+    <div class="algo-block">
+        <h3>Insertion Sort</h3>
+        <h4>Pseudocode</h4>
+        <pre>for i = 1 to n-1:
+    key = arr[i]; j = i-1
+    while j&gt;=0 and arr[j]&gt;key:
+        arr[j+1] = arr[j]; j--
+    arr[j+1] = key</pre>
+        <span class="complexity-pill">Time: O(n&sup2;)</span><span class="complexity-pill">Space: O(1)</span>
+        <h4>Advantages</h4><p>Efficient on nearly-sorted data.</p>
+        <h4>Disadvantages</h4><p>Inefficient on large random data.</p>
+    </div>
+
+    <div class="algo-block">
+        <h3>Merge Sort</h3>
+        <h4>Pseudocode</h4>
+        <pre>mergeSort(arr, l, r):
+    if l &lt; r:
+        mid = (l+r)/2
+        mergeSort(arr, l, mid)
+        mergeSort(arr, mid+1, r)
+        merge(arr, l, mid, r)</pre>
+        <span class="complexity-pill">Time: O(n log n)</span><span class="complexity-pill">Space: O(n)</span>
+        <h4>Advantages</h4><p>Consistent performance, stable sort.</p>
+        <h4>Disadvantages</h4><p>Needs extra memory for merging.</p>
+    </div>
+
+    <div class="algo-block">
+        <h3>Quick Sort</h3>
+        <h4>Pseudocode</h4>
+        <pre>quickSort(arr, low, high):
+    if low &lt; high:
+        p = partition(arr, low, high)
+        quickSort(arr, low, p-1)
+        quickSort(arr, p+1, high)</pre>
+        <span class="complexity-pill">Time: O(n log n) avg</span><span class="complexity-pill">Space: O(log n)</span>
+        <h4>Advantages</h4><p>Very fast in practice, in-place.</p>
+        <h4>Disadvantages</h4><p>Worst case O(n&sup2;).</p>
+    </div>
+
+    <h2 class="page-title" style="font-size:22px;">Try It Yourself</h2>
+    <p class="page-subtitle">Enter comma-separated numbers, choose an algorithm, and run it live in your browser.</p>
+
+    <div class="form-card">
+        <form id="demoForm" novalidate>
+            <div class="form-group full-width">
+                <label for="demoArrayInput">Numbers (comma-separated)</label>
+                <input type="text" id="demoArrayInput" name="demoArrayInput" placeholder="e.g., 45, 12, 89, 3, 67, 23" value="45, 12, 89, 3, 67, 23">
+            </div>
+
+            <label style="font-size:13px;font-weight:600;color:var(--dark-blue);display:block;margin-bottom:8px;">Algorithm</label>
+            <div class="pill-options">
+                <div class="pill-option"><input type="radio" name="demoAlgo" id="demoLinear" value="linear" checked><label for="demoLinear">Linear Search</label></div>
+                <div class="pill-option"><input type="radio" name="demoAlgo" id="demoBinary" value="binary"><label for="demoBinary">Binary Search</label></div>
+                <div class="pill-option"><input type="radio" name="demoAlgo" id="demoBubble" value="bubble"><label for="demoBubble">Bubble Sort</label></div>
+                <div class="pill-option"><input type="radio" name="demoAlgo" id="demoSelection" value="selection"><label for="demoSelection">Selection Sort</label></div>
+                <div class="pill-option"><input type="radio" name="demoAlgo" id="demoInsertion" value="insertion"><label for="demoInsertion">Insertion Sort</label></div>
+                <div class="pill-option"><input type="radio" name="demoAlgo" id="demoMerge" value="merge"><label for="demoMerge">Merge Sort</label></div>
+                <div class="pill-option"><input type="radio" name="demoAlgo" id="demoQuick" value="quick"><label for="demoQuick">Quick Sort</label></div>
+            </div>
+
+            <div class="form-group" id="demoTargetGroup" style="max-width:220px;">
+                <label for="demoTargetInput">Search Target</label>
+                <input type="number" id="demoTargetInput" name="demoTargetInput" placeholder="e.g., 89">
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Run Algorithm</button>
+            </div>
+        </form>
+
+        <div class="result-box" id="demoResultBox" style="display:none;"></div>
+    </div>
+</main>
+
+<div id="footer-placeholder"></div>
+
+<script src="js/storage.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/common.js"></script>
+<script src="js/algorithms.js"></script>
+</body>
+</html>

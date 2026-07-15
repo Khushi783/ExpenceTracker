@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login | ExpenseTracker</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/forms.css">
+<link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+<div class="auth-page">
+    <div class="auth-card">
+        <div class="auth-brand">
+            <div class="icon">&#128176;</div>
+            <h1>Welcome Back</h1>
+            <p>Log in to manage your expenses</p>
+        </div>
+
+        <form id="loginForm" novalidate>
+            <div class="form-group full-width">
+                <label for="loginUsername">Username</label>
+                <input type="text" id="loginUsername" name="loginUsername" placeholder="Enter your username" autocomplete="username" required>
+                <div class="field-error" id="loginUsernameError"></div>
+            </div>
+            <div class="form-group full-width">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" name="loginPassword" placeholder="Enter your password" autocomplete="current-password" required>
+                <div class="field-error" id="loginPasswordError"></div>
+            </div>
+            <div class="form-group full-width" style="flex-direction:row;align-items:center;gap:8px;">
+                <input type="checkbox" id="rememberMe" name="rememberMe" style="width:auto;">
+                <label for="rememberMe" style="margin:0;text-transform:none;font-weight:500;color:var(--text-muted);">Remember Me</label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+
+        <p class="auth-switch">Don't have an account? <a href="register.html">Register here</a></p>
+    </div>
+</div>
+
+<script src="js/storage.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/common.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // If already logged in, skip straight to the dashboard
+        if (getCurrentUsername()) {
+            window.location.href = 'index.html';
+            return;
+        }
+
+        const form = document.getElementById('loginForm');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            const remember = document.getElementById('rememberMe').checked;
+
+            const result = loginUser(username, password, remember);
+            if (result.success) {
+                showToast(result.message, 'success');
+                setTimeout(() => window.location.href = 'index.html', 500);
+            } else {
+                showToast(result.message, 'error');
+            }
+        });
+    });
+</script>
+</body>
+</html>

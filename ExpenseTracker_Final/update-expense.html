@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Update Expense | ExpenseTracker</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/forms.css">
+</head>
+<body>
+
+<div id="navbar-placeholder"></div>
+
+<main class="page-container">
+    <h1 class="page-title">Update Expense</h1>
+    <p class="page-subtitle">Find an expense by its ID, then edit its details.</p>
+
+    <div class="form-card" id="lookupSection">
+        <form id="lookupForm" novalidate>
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label for="lookupId">Expense ID</label>
+                    <input type="number" id="lookupId" name="lookupId" placeholder="e.g., 3" required>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Find Expense</button>
+                <a href="view-expenses.html" class="btn btn-secondary">Browse All Expenses</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="form-card" id="updateFormSection" style="display:none;">
+        <form id="updateExpenseForm" novalidate>
+            <input type="hidden" id="updateId">
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label for="expenseName">Expense Name</label>
+                    <input type="text" id="expenseName" name="expenseName" required>
+                    <div class="field-error" id="expenseNameError"></div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="expenseCategory">Category</label>
+                    <select id="expenseCategory" name="expenseCategory" required>
+                        <option value="">Select category</option>
+                        <option value="Food">Food</option>
+                        <option value="Transport">Transport</option>
+                        <option value="Bills">Bills</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Health">Health</option>
+                        <option value="Education">Education</option>
+                        <option value="Shopping">Shopping</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <div class="field-error" id="expenseCategoryError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="expenseAmount">Amount (&#8377;)</label>
+                    <input type="number" id="expenseAmount" name="expenseAmount" min="0.01" step="0.01" required>
+                    <div class="field-error" id="expenseAmountError"></div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="expenseDate">Date</label>
+                    <input type="date" id="expenseDate" name="expenseDate" required>
+                    <div class="field-error" id="expenseDateError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="expenseDescription">Description (optional)</label>
+                    <input type="text" id="expenseDescription" name="expenseDescription">
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <button type="button" class="btn btn-secondary" id="cancelUpdateBtn">Cancel</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<div id="footer-placeholder"></div>
+
+<script src="js/storage.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/common.js"></script>
+<script src="js/updateExpense.js"></script>
+</body>
+</html>

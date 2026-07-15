@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard | ExpenseTracker</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+<div id="navbar-placeholder"></div>
+
+<main class="page-container">
+    <h1 class="page-title">Dashboard</h1>
+    <p class="page-subtitle">A quick overview of your expenses, powered by the algorithms behind this project.</p>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-label">Total Expense</div>
+            <div class="stat-value" id="statTotal">&#8377;0.00</div>
+        </div>
+        <div class="stat-card accent-green">
+            <div class="stat-label">Average Expense</div>
+            <div class="stat-value" id="statAverage">&#8377;0.00</div>
+        </div>
+        <div class="stat-card accent-amber">
+            <div class="stat-label">Maximum Expense</div>
+            <div class="stat-value" id="statMax">&#8377;0.00</div>
+        </div>
+        <div class="stat-card accent-red">
+            <div class="stat-label">Minimum Expense</div>
+            <div class="stat-value" id="statMin">&#8377;0.00</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Total Transactions</div>
+            <div class="stat-value" id="statCount">0</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Top Category</div>
+            <div class="stat-value" id="statHighestCategory">-</div>
+        </div>
+    </div>
+
+    <h2 class="page-title" style="font-size:20px;margin-bottom:16px;">Quick Actions</h2>
+    <div class="quick-links-grid">
+        <a class="quick-link-card" href="add-expense.html"><div class="icon">&#10133;</div><div class="label">Add Expense</div></a>
+        <a class="quick-link-card" href="view-expenses.html"><div class="icon">&#128203;</div><div class="label">View Expenses</div></a>
+        <a class="quick-link-card" href="update-expense.html"><div class="icon">&#9998;</div><div class="label">Update Expense</div></a>
+        <a class="quick-link-card" href="delete-expense.html"><div class="icon">&#128465;</div><div class="label">Delete Expense</div></a>
+        <a class="quick-link-card" href="search-name.html"><div class="icon">&#128269;</div><div class="label">Search by Name</div></a>
+        <a class="quick-link-card" href="search-category.html"><div class="icon">&#127991;&#65039;</div><div class="label">Search by Category</div></a>
+        <a class="quick-link-card" href="search-id.html"><div class="icon">&#128290;</div><div class="label">Search by ID</div></a>
+        <a class="quick-link-card" href="sort.html"><div class="icon">&#8597;&#65039;</div><div class="label">Sort Expenses</div></a>
+        <a class="quick-link-card" href="monthly-summary.html"><div class="icon">&#128197;</div><div class="label">Monthly Summary</div></a>
+        <a class="quick-link-card" href="category-summary.html"><div class="icon">&#128202;</div><div class="label">Category Summary</div></a>
+        <a class="quick-link-card" href="statistics.html"><div class="icon">&#128200;</div><div class="label">Full Statistics</div></a>
+        <a class="quick-link-card" href="algorithm-demo.html"><div class="icon">&#129504;</div><div class="label">Algorithm Demo</div></a>
+    </div>
+</main>
+
+<div id="footer-placeholder"></div>
+
+<script src="js/storage.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/common.js"></script>
+<script src="js/reports.js"></script>
+<script src="js/statistics.js"></script>
+</body>
+</html>

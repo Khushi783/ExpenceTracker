@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register | ExpenseTracker</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/forms.css">
+<link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+<div class="auth-page">
+    <div class="auth-card">
+        <div class="auth-brand">
+            <div class="icon">&#128273;</div>
+            <h1>Create Your Account</h1>
+            <p>Start tracking your expenses today</p>
+        </div>
+
+        <form id="registerForm" novalidate>
+            <div class="form-group full-width">
+                <label for="regUsername">Username</label>
+                <input type="text" id="regUsername" name="regUsername" placeholder="Choose a username" autocomplete="username" required>
+                <div class="field-error" id="regUsernameError"></div>
+            </div>
+            <div class="form-group full-width">
+                <label for="regEmail">Email</label>
+                <input type="email" id="regEmail" name="regEmail" placeholder="you@example.com" autocomplete="email" required>
+                <div class="field-error" id="regEmailError"></div>
+            </div>
+            <div class="form-group full-width">
+                <label for="regPassword">Password</label>
+                <input type="password" id="regPassword" name="regPassword" placeholder="At least 6 characters" autocomplete="new-password" required>
+                <div class="field-error" id="regPasswordError"></div>
+            </div>
+            <div class="form-group full-width">
+                <label for="regConfirmPassword">Confirm Password</label>
+                <input type="password" id="regConfirmPassword" name="regConfirmPassword" placeholder="Re-enter your password" autocomplete="new-password" required>
+                <div class="field-error" id="regConfirmPasswordError"></div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+        </form>
+
+        <p class="auth-switch">Already have an account? <a href="login.html">Login here</a></p>
+    </div>
+</div>
+
+<script src="js/storage.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/common.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        if (getCurrentUsername()) {
+            window.location.href = 'index.html';
+            return;
+        }
+
+        const form = document.getElementById('registerForm');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('regUsername').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+            const confirmPassword = document.getElementById('regConfirmPassword').value;
+
+            const result = registerUser(username, email, password, confirmPassword);
+            if (result.success) {
+                showToast(result.message, 'success');
+                form.reset();
+                setTimeout(() => window.location.href = 'login.html', 800);
+            } else {
+                showToast(result.message, 'error');
+            }
+        });
+    });
+</script>
+</body>
+</html>

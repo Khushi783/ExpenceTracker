@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delete Expense | ExpenseTracker</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/forms.css">
+</head>
+<body>
+
+<div id="navbar-placeholder"></div>
+
+<main class="page-container">
+    <h1 class="page-title">Delete Expense</h1>
+    <p class="page-subtitle">Find an expense by its ID and permanently remove it.</p>
+
+    <div class="form-card">
+        <form id="deleteLookupForm" novalidate>
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label for="deleteId">Expense ID</label>
+                    <input type="number" id="deleteId" name="deleteId" placeholder="e.g., 3" required>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-secondary">Find Expense</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteBtn" style="display:none;">Delete Permanently</button>
+            </div>
+        </form>
+
+        <div class="result-box" id="deleteResultBox" style="display:none;"></div>
+    </div>
+</main>
+
+<div id="footer-placeholder"></div>
+
+<script src="js/storage.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/common.js"></script>
+<script src="js/deleteExpense.js"></script>
+</body>
+</html>
